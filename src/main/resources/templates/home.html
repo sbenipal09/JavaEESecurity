@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th = "http://www.thymeleaf.org"
-      xmlns:sec = "http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -8,6 +8,18 @@
 <body>
 <h1>Security Example of spring boot</h1>
 <div sec:authorize="isAuthenticated()">
+User's Name : <span sec:authentication="name"></span>
+    <br>
+    Roles : <span sec:authentication="principal.authorities"></span><!--//displays roles--->
+    <br><br>
+    <form th:action="@{/logout}" method="post">
+
+        <input type="submit" value="logout">
+        <!--//login it appears
+    //not login not appears
+    //if login , this will appear for logging out on the login page
+    -->
+    </form>
 
 
 
