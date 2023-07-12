@@ -25,10 +25,14 @@ public class SecurityController {
         return "Multiple";
     }
 
-    @GetMapping("/login")
+    @GetMapping("/logintem")
     public String goLogin(){
         return "login";
     }
 
-    @
-}
+    @GetMapping("/accessdenied")
+        public String accessDenied(){
+            return "accessdenied";
+        }
+    }
+
