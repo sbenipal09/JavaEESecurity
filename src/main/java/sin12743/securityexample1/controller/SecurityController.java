@@ -24,4 +24,11 @@ public class SecurityController {
     public String goMultiple(){
         return "Multiple";
     }
+
+    @GetMapping("/login")
+    public String goLogin(){
+        return "login";
+    }
+
+    @
 }

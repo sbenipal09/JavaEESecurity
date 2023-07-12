@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+<h1>Login</h1>
+<div th:if="${param.failed}">
+    <!-- only appears if person  localhost:8080/login?failed-->
+The username or password are incorrect
+</div>
+
+<div>
+
+</div>
+<form th:action="@{/login}" method="post">
+  Username : <input type="text" name="username" placeholder="username" autofocus="autofocus">
+  Password : <input type="password" name = " password" placeholder="password">
+  <input type="submit" value = "Login">
+</form>
+
+<br>
+<a href="/">Home</a>
+</body>
+</html>
