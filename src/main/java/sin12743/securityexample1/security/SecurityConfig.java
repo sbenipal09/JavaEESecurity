@@ -42,11 +42,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
+
         http.authorizeHttpRequests((auth)->
                 auth
                         .requestMatchers(HttpMethod.GET, "/").permitAll()
                         .requestMatchers(HttpMethod.GET, "/user").hasRole("USER")
                         .requestMatchers(HttpMethod.GET, "/Multiple").hasRole("PICKLE")
+                        .requestMatchers(HttpMethod.GET,"/h2-console/**").permitAll()
                         .anyRequest().authenticated())
                 .formLogin((formlogin)->
                 formlogin
