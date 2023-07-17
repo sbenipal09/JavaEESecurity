@@ -2,6 +2,10 @@ package sin12743.securityexample1.bean;
 
 
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -10,4 +14,9 @@ public class User {
     private String userName;
     private String encryptedPassword;
     private byte enabled;
+
+    public User(String userName, String encryptedPassword, List<GrantedAuthority> grantList) {
+        this.userName = userName;
+        this.encryptedPassword = encryptedPassword;
+    }
 }

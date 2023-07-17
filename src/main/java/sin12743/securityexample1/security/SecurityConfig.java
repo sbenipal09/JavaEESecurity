@@ -1,12 +1,17 @@
 package sin12743.securityexample1.security;
 
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
@@ -14,8 +19,9 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@AllArgsConstructor
 public class SecurityConfig {
-    @Bean
+   /*
     public InMemoryUserDetailsManager
     userDetailsService(PasswordEncoder passwordEncoder) {
         UserDetails user1 = User.withUsername("Simran")
@@ -36,7 +42,7 @@ public class SecurityConfig {
         PasswordEncoder encoder =
                 PasswordEncoderFactories.createDelegatingPasswordEncoder();
         return encoder;
-    }
+    }*/
 
 
     @Bean
@@ -73,4 +79,18 @@ public class SecurityConfig {
 
     }
 
+    private UserDetailsServiceImpl userDetailsService;
+
+@Bean
+    public BCryptPasswordEncoder passwordEncoder(){
+    return new BCryptPasswordEncoder();
+}
+@Bean
+    public AuthenticationManager authenticationManager(HttpSecurity http,
+                                                       PasswordEncoder passwordEncoder) throws Exception{
+    AuthenticationManagerBuilder authenticationManagerBuilder =
+            http.getSharedObject(AuthenticationManagerBuilder.class);
+    authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
+    return  authenticationManagerBuilder.build();
+}
 }

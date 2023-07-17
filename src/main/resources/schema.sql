@@ -18,3 +18,13 @@ create table USER_ROLE
 	userId BIGINT NOT NULL,
 	roleId BIGINT NOT NULL
 );
+alter table USER_ROLE
+	add constraint USER_ROLE_UK unique (userId, roleId);
+
+alter table USER_ROLE
+	add constraint USER_ROLE_FK1 foreign key (userId)
+		references SEC_USER (userId);
+
+alter table USER_ROLE
+	add constraint USER_ROLE_FK2 foreign key (roleId)
+		references SEC_ROLE (roleId);
